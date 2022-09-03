@@ -1,5 +1,5 @@
 ﻿using Core.Persistence.Repositories;
-using kodlama.io.Devs.Domain.Entites;
+using kodlama.io.Devs.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

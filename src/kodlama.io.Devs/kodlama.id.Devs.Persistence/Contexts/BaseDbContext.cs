@@ -1,4 +1,4 @@
-﻿using kodlama.io.Devs.Domain.Entites;
+﻿using kodlama.io.Devs.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;

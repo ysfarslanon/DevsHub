@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace kodlama.io.Devs.Domain.Entites
+namespace kodlama.io.Devs.Domain.Entities
 {
     public class ProgrammingLanguage : Entity
     {
