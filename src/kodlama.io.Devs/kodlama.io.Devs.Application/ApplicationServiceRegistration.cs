@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using kodlama.io.Devs.Application.Features.ProgrammingLanguages.Rules;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,8 @@ namespace kodlama.io.Devs.Application
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddScoped<ProgrammingLanguageBusinessRules>();
 
             return services;
         }

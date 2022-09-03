@@ -14,6 +14,7 @@
 
   
   <ItemGroup>
+    <ProjectReference Include="..\..\core\Core.CrossCuttingConcers\Core.CrossCuttingConcerns.csproj" />
     <ProjectReference Include="..\..\core\Core.Persistence\Core.Persistence.csproj" />
     <ProjectReference Include="..\kodlama.io.Devs.Domain\kodlama.io.Devs.Domain.csproj" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
@@ -24,7 +25,6 @@
   <ItemGroup>
     <Folder Include="Features\ProgrammingLanguages\Models\" />
     <Folder Include="Features\ProgrammingLanguages\Queries\" />
-    <Folder Include="Features\ProgrammingLanguages\Rules\" />
     <Folder Include="Features\ProgrammingLanguages\Contants\" />
   </ItemGroup>
 

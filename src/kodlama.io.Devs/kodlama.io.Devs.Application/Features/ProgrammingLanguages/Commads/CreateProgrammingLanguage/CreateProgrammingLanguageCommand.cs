@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using kodlama.io.Devs.Application.Features.ProgrammingLanguages.Dtos;
+using kodlama.io.Devs.Application.Features.ProgrammingLanguages.Rules;
 using kodlama.io.Devs.Application.Services.Repositories;
 using kodlama.io.Devs.Domain.Entities;
 using MediatR;
@@ -20,17 +21,18 @@ namespace kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commads.Crea
     {
         private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
         private readonly IMapper _mapper;
-        // b rules
+        private readonly ProgrammingLanguageBusinessRules _programmingLanguageRules;
 
-        public CreateProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper)
+        public CreateProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageBusinessRules programmingLanguageRules)
         {
             _programmingLanguageRepository = programmingLanguageRepository;
             _mapper = mapper;
+            _programmingLanguageRules = programmingLanguageRules;
         }
 
         public async Task<CreateProgrammingLanguageDto> Handle(CreateProgrammingLanguageCommand request, CancellationToken cancellationToken)
         {
-            //b rules
+            await _programmingLanguageRules.ProgrammingLanguageNameCanNotBeDuplicatedWhenInserted(request.Name);            
 
             ProgrammingLanguage mappedProgrammingLanguage = _mapper.Map<ProgrammingLanguage>(request);
             ProgrammingLanguage createdProgrammingLanguage = await _programmingLanguageRepository.AddAsync(mappedProgrammingLanguage);
