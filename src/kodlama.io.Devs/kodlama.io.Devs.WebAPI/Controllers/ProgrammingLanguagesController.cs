@@ -1,5 +1,6 @@
 ﻿using kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commads.CreateProgrammingLanguage;
 using kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commads.DeleteProgrammingLanguage;
+using kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commads.UpdateProgrammingLanguage;
 using kodlama.io.Devs.Application.Features.ProgrammingLanguages.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,14 @@ namespace kodlama.io.Devs.WebAPI.Controllers
             DeleteProgrammingLanguageDto result = await Mediator.Send(deleteProgrammingLanguageCommand);
 
             return Ok(result);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody]UpdateProgrammingLanguageCommand updateProgrammingLanguageCommand)
+        {
+            UpdateProgrammingLanguageDto result = await Mediator.Send(updateProgrammingLanguageCommand);
+
+            return Ok();
         }
     }
 }
