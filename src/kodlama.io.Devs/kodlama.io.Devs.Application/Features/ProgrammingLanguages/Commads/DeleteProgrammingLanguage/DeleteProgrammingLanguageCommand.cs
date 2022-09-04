@@ -34,7 +34,8 @@ namespace kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commads.Dele
 
         public async Task<DeleteProgrammingLanguageDto> Handle(DeleteProgrammingLanguageCommand request, CancellationToken cancellationToken)
         {
-            // rules
+            await _programmingLanguageRules.ProgrammingLanguageMustBeExist(request.Id); 
+
             ProgrammingLanguage? selectedEntity = await _programmingLanguageRepository.GetAsync(e => e.Id == request.Id);
 
             await _programmingLanguageRepository.DeleteAsync(selectedEntity);
