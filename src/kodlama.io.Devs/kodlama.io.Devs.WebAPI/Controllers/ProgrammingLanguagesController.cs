@@ -1,10 +1,14 @@
-﻿using kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commads.CreateProgrammingLanguage;
+﻿using Core.Application.Requests;
+using kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commads.CreateProgrammingLanguage;
 using kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commads.DeleteProgrammingLanguage;
 using kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commads.UpdateProgrammingLanguage;
 using kodlama.io.Devs.Application.Features.ProgrammingLanguages.Dtos;
+using kodlama.io.Devs.Application.Features.ProgrammingLanguages.Models;
 using kodlama.io.Devs.Application.Features.ProgrammingLanguages.Queries.GetByIdProgrammingLanguage;
+using kodlama.io.Devs.Application.Features.ProgrammingLanguages.Queries.GetListBrand;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace kodlama.io.Devs.WebAPI.Controllers
 {
@@ -41,6 +45,15 @@ namespace kodlama.io.Devs.WebAPI.Controllers
         {
             ProgrammingLaguageGetByIdDto programmingLaguageGetByIdDto = await Mediator.Send(getByIdProgrammingLanguageQuery);
             return Ok(programmingLaguageGetByIdDto);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetList([FromQuery]PageRequest pageRequest)
+        {
+            GetListProgrammingLaguageQuery getListProgrammingLaguageQuery = new() { PageRequest= pageRequest };   
+            ProgrammingLanguageListModel result = await Mediator.Send(getListProgrammingLaguageQuery);
+
+            return Ok(result);
         }
     }
 }
