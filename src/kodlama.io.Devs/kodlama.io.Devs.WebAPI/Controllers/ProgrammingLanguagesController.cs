@@ -37,7 +37,7 @@ namespace kodlama.io.Devs.WebAPI.Controllers
         {
             UpdateProgrammingLanguageDto result = await Mediator.Send(updateProgrammingLanguageCommand);
 
-            return Ok();
+            return Ok(result);
         }
 
         [HttpGet("{Id}")]
