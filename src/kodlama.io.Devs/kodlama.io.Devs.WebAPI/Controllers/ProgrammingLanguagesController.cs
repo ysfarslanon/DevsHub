@@ -2,6 +2,7 @@
 using kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commads.DeleteProgrammingLanguage;
 using kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commads.UpdateProgrammingLanguage;
 using kodlama.io.Devs.Application.Features.ProgrammingLanguages.Dtos;
+using kodlama.io.Devs.Application.Features.ProgrammingLanguages.Queries.GetByIdProgrammingLanguage;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,7 +13,7 @@ namespace kodlama.io.Devs.WebAPI.Controllers
     public class ProgrammingLanguagesController : BaseController
     {
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody]CreateProgrammingLanguageCommand createProgrammingLanguageCommand)
+        public async Task<IActionResult> Add([FromBody] CreateProgrammingLanguageCommand createProgrammingLanguageCommand)
         {
             CreateProgrammingLanguageDto result = await Mediator.Send(createProgrammingLanguageCommand);
 
@@ -20,7 +21,7 @@ namespace kodlama.io.Devs.WebAPI.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Delete([FromBody]DeleteProgrammingLanguageCommand deleteProgrammingLanguageCommand)
+        public async Task<IActionResult> Delete([FromBody] DeleteProgrammingLanguageCommand deleteProgrammingLanguageCommand)
         {
             DeleteProgrammingLanguageDto result = await Mediator.Send(deleteProgrammingLanguageCommand);
 
@@ -28,11 +29,18 @@ namespace kodlama.io.Devs.WebAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody]UpdateProgrammingLanguageCommand updateProgrammingLanguageCommand)
+        public async Task<IActionResult> Update([FromBody] UpdateProgrammingLanguageCommand updateProgrammingLanguageCommand)
         {
             UpdateProgrammingLanguageDto result = await Mediator.Send(updateProgrammingLanguageCommand);
 
             return Ok();
+        }
+
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> GetById([FromRoute] GetByIdProgrammingLanguageQuery getByIdProgrammingLanguageQuery)
+        {
+            ProgrammingLaguageGetByIdDto programmingLaguageGetByIdDto = await Mediator.Send(getByIdProgrammingLanguageQuery);
+            return Ok(programmingLaguageGetByIdDto);
         }
     }
 }

@@ -31,9 +31,5 @@ namespace kodlama.io.Devs.Application.Features.ProgrammingLanguages.Rules
             if (result is null) throw new BusinessException("Programming language not exist.");
         }
 
-        internal Task ProgrammingLanguageNameCanNotBeDuplicatedWhenInserted(int name)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
