@@ -25,10 +25,10 @@ namespace kodlama.io.Devs.Application.Features.ProgrammingLanguages.Rules
             if (result.Items.Any()) throw new BusinessException("Programming language name exists.");
         }
 
-        public async Task ProgrammingLanguageMustBeExist(int id)
+        public async Task ProgrammingLanguageMustBeExist(ProgrammingLanguage programmingLanguage)
         {
-            ProgrammingLanguage? result = await _programmingLanguageRepository.GetAsync(e => e.Id == id);
-            if (result is null) throw new BusinessException("Programming language not exist.");
+           
+            if (programmingLanguage is null) throw new BusinessException("Programming language not exist.");
         }
 
     }

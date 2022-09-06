@@ -35,16 +35,16 @@ namespace kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commads.Upda
 
         public async Task<UpdateProgrammingLanguageDto> Handle(UpdateProgrammingLanguageCommand request, CancellationToken cancellationToken)
         {
-            await _programmingLanguageBusinessRules.ProgrammingLanguageMustBeExist(request.Id);
-            await _programmingLanguageBusinessRules.ProgrammingLanguageNameCanNotBeDuplicatedWhenInserted(request.Name);
-            //I used var instead of "ProgammingLanguage" because it became too long with the entity name and degrading readability
-            var selectedEntity = _mapper.Map<ProgrammingLanguage>(request);
-            var updatedEntity = await _programmingLanguageRepository.UpdateAsync(selectedEntity);
-            // special properties of Programming Language entity
+            var mappedEntity = _mapper.Map<ProgrammingLanguage>(request);
+            
+            await _programmingLanguageBusinessRules.ProgrammingLanguageMustBeExist(mappedEntity);
+            await _programmingLanguageBusinessRules.ProgrammingLanguageNameCanNotBeDuplicatedWhenInserted(mappedEntity.Name);
 
-            UpdateProgrammingLanguageDto returnEntity = _mapper.Map<UpdateProgrammingLanguageDto>(updatedEntity);
+            var updatedEntity = await _programmingLanguageRepository.UpdateAsync(mappedEntity);
+            var returnDto = _mapper.Map<UpdateProgrammingLanguageDto>(updatedEntity);
 
-            return returnEntity;
+            return returnDto;
+
         }
     }
 
