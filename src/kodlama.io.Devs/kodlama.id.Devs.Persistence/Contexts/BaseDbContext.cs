@@ -30,7 +30,7 @@ namespace kodlama.id.Devs.Persistence.Contexts
         {
             modelBuilder.Entity<ProgrammingLanguage>(pl =>
             {
-                pl.ToTable("ProgrammingLanguage").HasKey("Id");
+                pl.ToTable("ProgrammingLanguages").HasKey("Id");
                 pl.Property(p => p.Id).HasColumnName("Id");
                 pl.Property(p => p.Name).HasColumnName("Name");
 
