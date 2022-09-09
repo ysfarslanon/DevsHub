@@ -1,6 +1,7 @@
 ﻿using kodlama.id.Devs.Persistence.Contexts;
 using kodlama.id.Devs.Persistence.Repositories;
 using kodlama.io.Devs.Application.Services.Repositories;
+using kodlama.io.Devs.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +24,7 @@ namespace kodlama.io.Devs.Persistence
                                         configuration.GetConnectionString("DevsHubConnectionString")));
 
             services.AddScoped<IProgrammingLanguageRepository, ProgrammingLanguageRepository>();
+            services.AddScoped<ITechnologyRepository, TechnologyRepository>();
 
 
             return services;

@@ -9,6 +9,7 @@ namespace kodlama.io.Devs.Domain.Entities
 {
     public class ProgrammingLanguage : Entity
     {
+        public virtual ICollection<Technology> Technologies { get; set; }
         public string Name { get; set; }
 
         public ProgrammingLanguage()

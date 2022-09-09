@@ -25,6 +25,13 @@
   
   <ItemGroup>
     <Folder Include="Features\ProgrammingLanguages\Contants\" />
+    <Folder Include="Features\Technology\Dtos\" />
+    <Folder Include="Features\Technology\Queries\" />
+    <Folder Include="Features\Technology\Mapping\" />
+    <Folder Include="Features\Technology\Rules\" />
+    <Folder Include="Features\Technology\Models\" />
+    <Folder Include="Features\Technology\Commands\" />
+    <Folder Include="Features\Technology\Contants\" />
   </ItemGroup>
 
 </Project>
