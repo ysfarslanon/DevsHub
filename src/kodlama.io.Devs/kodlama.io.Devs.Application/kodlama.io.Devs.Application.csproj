@@ -24,6 +24,10 @@
 
   
   <ItemGroup>
+    <Folder Include="Features\DeveloperUsers\Contants\" />
+    <Folder Include="Features\DeveloperUsers\Models\" />
+    <Folder Include="Features\DeveloperUsers\Queries\" />
+    <Folder Include="Features\DeveloperUsers\Dtos\" />
     <Folder Include="Features\ProgrammingLanguages\Contants\" />
     <Folder Include="Features\Technologies\Contants\" />
   </ItemGroup>
