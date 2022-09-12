@@ -26,6 +26,7 @@ namespace kodlama.io.Devs.Application.Features.DeveloperUsers.Commands.LoginDeve
     public class LoginDeveloperUserCommandHandler : IRequestHandler<LoginDeveloperUserCommand, AccessToken>
     {
         private readonly IUserRepository _userRepository;
+        IDeveloperUserRepository _developerUserRepository;
         private readonly IMapper _mapper;
         private readonly ITokenHelper _tokenHelper;
         private readonly DeveloperUserBusinessRules _developerUserBusinessRules;
@@ -37,6 +38,7 @@ namespace kodlama.io.Devs.Application.Features.DeveloperUsers.Commands.LoginDeve
             _mapper = mapper;
             _tokenHelper = tokenHelper;
             _developerUserBusinessRules = developerUserBusinessRules;
+            _developerUserRepository = developerUserRepository;
         }
 
         public async Task<AccessToken> Handle(LoginDeveloperUserCommand request, CancellationToken cancellationToken)
@@ -48,7 +50,7 @@ namespace kodlama.io.Devs.Application.Features.DeveloperUsers.Commands.LoginDeve
             await _developerUserBusinessRules.UserLoginEMailCheck(request.Email);
             await _developerUserBusinessRules.IsVerifyPassword(request.Password, user.PasswordHash, user.PasswordSalt);
 
-            
+                            
             List<OperationClaim> operationClaims = new List<OperationClaim>() {};
 
            
@@ -56,6 +58,14 @@ namespace kodlama.io.Devs.Application.Features.DeveloperUsers.Commands.LoginDeve
             {
                 operationClaims.Add(operationClaim.OperationClaim);
             }
+            // TODO: verify password
+            // TODO: add claims
+            // TODO: 
+
+
+
+
+            //AccessToken accessToken = _tokenHelper.CreateToken(user, new List<OperationClaim>());
 
             AccessToken access = _tokenHelper.CreateToken(user, operationClaims);
 

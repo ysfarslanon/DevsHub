@@ -40,6 +40,26 @@ namespace kodlama.io.Devs.WebAPI.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> get()
+        {
+            //var user = await _user.GetAsync(p => p.Email == "string",
+            //                                            include: i => i.Include(a => a.UserOperationClaims)
+            //                                            .ThenInclude(b => b.OperationClaim)
+            //                                            );
+
+            var user2 = await _user.GetAsync(p => p.Email == "string"
+            ,
+                                                       include: i => i.Include(a => a.UserOperationClaims)
+            );
+
+
+
+            //AccessToken access = _tokenHelper.CreateToken(new User(), new List<OperationClaim>());
+
+
+            return Ok(user2);
+        }
 
     }
 }
