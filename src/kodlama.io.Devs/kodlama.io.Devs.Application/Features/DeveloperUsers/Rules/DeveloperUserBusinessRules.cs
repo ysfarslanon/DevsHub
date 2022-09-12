@@ -19,6 +19,13 @@ namespace kodlama.io.Devs.Application.Features.DeveloperUsers.Rules
             _userRepository = userRepository;
         }
 
+        public async Task UserLoginEMailCheck(string email)
+        {
+            User user = await _userRepository.GetAsync(u => u.Email == email);
+
+            if (user is null) throw new BusinessException("Kullanıcı bulunamadı");
+        }
+
         public void UserMustExist(User user)
         {
             if (user == null) throw new BusinessException("Kullanıcı bulunamadı");

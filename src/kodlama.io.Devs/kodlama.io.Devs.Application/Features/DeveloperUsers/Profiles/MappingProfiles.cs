@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Core.Security.Entities;
 using kodlama.io.Devs.Application.Features.DeveloperUsers.Commands.LoginDeveloperUser;
+using kodlama.io.Devs.Application.Features.DeveloperUsers.Commands.LoginDevelopUser;
 using kodlama.io.Devs.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,8 @@ namespace kodlama.io.Devs.Application.Features.DeveloperUsers.Profiles
         public MappingProfiles()
         {
             CreateMap<DeveloperUser, CreateDeveloperUserCommand>().ReverseMap();
+            CreateMap<User, LoginDeveloperUserCommand>().ReverseMap();
+            
         }
     }
 }

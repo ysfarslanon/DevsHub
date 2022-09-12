@@ -85,9 +85,21 @@ namespace kodlama.id.Devs.Persistence.Contexts
             {
                 github.ToTable("GithubProfiles").HasKey("Id");
                 github.Property(p => p.Id).HasColumnName("Id");
+                github.Property(p => p.DeveloperUserId).HasColumnName("DeveloperUserId");
                 github.Property(p => p.URL).HasColumnName("URL");
 
                 github.HasOne(p => p.DeveloperUser);
+            });
+
+            modelBuilder.Entity<UserOperationClaim>(userOptClaim =>
+            {
+                userOptClaim.ToTable("UserOperationClaims").HasKey("Id");
+                userOptClaim.Property(p => p.Id).HasColumnName("Id");
+                userOptClaim.Property(p => p.UserId).HasColumnName("UserId");
+                userOptClaim.Property(p => p.OperationClaimId).HasColumnName("OperationClaimId");
+
+                userOptClaim.HasOne(p => p.User);
+                userOptClaim.HasOne(p => p.OperationClaim);
             });
 
             modelBuilder.Entity<OperationClaim>(operationClaim =>
@@ -99,14 +111,7 @@ namespace kodlama.id.Devs.Persistence.Contexts
             OperationClaim[] operationClaims = { new(1, "Admin"), new(2, "User") };
             modelBuilder.Entity<OperationClaim>().HasData(operationClaims);
 
-            modelBuilder.Entity<UserOperationClaim>(userOptClaim =>
-            {
-                userOptClaim.ToTable("UserOperationClaims").HasKey("Id");
-                userOptClaim.Property(p => p.Id).HasColumnName("Id");
-
-                userOptClaim.HasOne(p => p.User);
-                userOptClaim.HasOne(p => p.OperationClaim);
-            });
+            
 
         }
     }
