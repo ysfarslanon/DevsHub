@@ -16,6 +16,12 @@ namespace kodlama.io.Devs.Application.Features.GithubProfiles.Profiles
         {
             CreateMap<GithubProfile, CreateGithubProfileCommand>().ReverseMap();
             CreateMap<GithubProfile, CreateGithubProfileDto>().ReverseMap();
+            
+            CreateMap<GithubProfile, UpdateGithubProfileDto>().ReverseMap();
+            CreateMap<GithubProfile, UpdateGithubProfileDto>().ReverseMap();
+            
+            CreateMap<GithubProfile, DeleteGithubProfileDto>().ReverseMap();
+            CreateMap<GithubProfile, DeleteGithubProfileDto>().ReverseMap();
 
         }
     }
