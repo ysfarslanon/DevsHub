@@ -19,15 +19,22 @@ namespace kodlama.io.Devs.Application.Features.DeveloperUsers.Rules
             _userRepository = userRepository;
         }
 
-        public void UserMustExist(User user)
+        public async Task UserLoginEMailCheck(string email)
+        {
+            User user = await _userRepository.GetAsync(u => u.Email == email);
+
+            if (user is null) throw new BusinessException("Kullanıcı bulunamadı");
+        }
+
+        public async Task UserMustExist(User user)
         {
             if (user == null) throw new BusinessException("Kullanıcı bulunamadı");
         }
 
-        public void IsVerifyPassword(string password, byte[] passwordHash, byte[] passwordSalt)
+        public async Task IsVerifyPassword(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             var result = HashingHelper.VerifyPasswordHash(password, passwordHash, passwordSalt);
-            if (!result) throw new BusinessException("");
+            if (!result) throw new BusinessException("Hatalı şifre");
         }
 
         public async Task EmailCanNotBeDuplicatedWhenInserted(string email)

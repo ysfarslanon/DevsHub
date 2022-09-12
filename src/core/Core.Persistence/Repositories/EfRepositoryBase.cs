@@ -20,8 +20,9 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
     public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate,
                                          Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)
     {
-        IQueryable<TEntity> queryable = Context.Set<TEntity>();
+        IQueryable<TEntity> queryable = Query();
         if (include != null) queryable = include(queryable);
+        if (predicate != null) queryable = queryable.Where(predicate);
         return await queryable.FirstOrDefaultAsync(predicate);
     }
 
