@@ -15,16 +15,7 @@ namespace kodlama.io.Devs.WebAPI.Controllers
     [ApiController]
     public class AuthController : BaseController
     {
-        IUserRepository _user;
-        ITokenHelper _tokenHelper;
-        IDeveloperUserRepository _developerUserRepository;
-        public AuthController(IUserRepository user, ITokenHelper tokenHelper, IDeveloperUserRepository developerUserRepository)
-        {
-            _user = user;
-            _tokenHelper = tokenHelper;
-            _developerUserRepository = developerUserRepository;
-        }
-
+        
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] CreateDeveloperUserCommand createDeveloperCommand)
         {

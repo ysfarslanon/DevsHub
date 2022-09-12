@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace kodlama.io.Devs.Application.Features.GithubProfiles.Commands.CreateGithubProfile
 {
-    public class CreateGithubProfileCommandValidator : AbstractValidator<DeleteGithubProfileCommand>
+    public class CreateGithubProfileCommandValidator : AbstractValidator<CreateGithubProfileCommand>
     {
         public CreateGithubProfileCommandValidator()
         {

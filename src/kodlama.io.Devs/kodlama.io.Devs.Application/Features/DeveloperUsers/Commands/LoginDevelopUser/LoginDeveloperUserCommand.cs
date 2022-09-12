@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Core.CrossCuttingConcerns.Exceptions;
-using Core.Persistence.Paging;
 using Core.Security.Dtos;
 using Core.Security.Entities;
 using Core.Security.Hashing;
@@ -31,7 +29,7 @@ namespace kodlama.io.Devs.Application.Features.DeveloperUsers.Commands.LoginDeve
         private readonly DeveloperUserBusinessRules _developerUserBusinessRules;
 
 
-        public LoginDeveloperUserCommandHandler(IUserRepository userRepository, IMapper mapper, ITokenHelper tokenHelper, DeveloperUserBusinessRules developerUserBusinessRules, IDeveloperUserRepository developerUserRepository)
+        public LoginDeveloperUserCommandHandler(IUserRepository userRepository, IMapper mapper, ITokenHelper tokenHelper, DeveloperUserBusinessRules developerUserBusinessRules)
         {
             _userRepository = userRepository;
             _mapper = mapper;
@@ -41,17 +39,19 @@ namespace kodlama.io.Devs.Application.Features.DeveloperUsers.Commands.LoginDeve
 
         public async Task<AccessToken> Handle(LoginDeveloperUserCommand request, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.GetAsync(p => p.Email.ToLower() == request.Email.ToLower(),
-            include: i => i.Include(a => a.UserOperationClaims).ThenInclude(b => b.OperationClaim));
+            var user = await _userRepository
+                .GetAsync(
+                p => p.Email.ToLower() == request.Email.ToLower(),
+                include: i => i.Include(a => a.UserOperationClaims).ThenInclude(b => b.OperationClaim)
+                );
 
             await _developerUserBusinessRules.UserMustExist(user);
             await _developerUserBusinessRules.UserLoginEMailCheck(request.Email);
             await _developerUserBusinessRules.IsVerifyPassword(request.Password, user.PasswordHash, user.PasswordSalt);
 
-            
+                            
             List<OperationClaim> operationClaims = new List<OperationClaim>() {};
 
-           
             foreach (var operationClaim in user.UserOperationClaims)
             {
                 operationClaims.Add(operationClaim.OperationClaim);
@@ -60,7 +60,6 @@ namespace kodlama.io.Devs.Application.Features.DeveloperUsers.Commands.LoginDeve
             AccessToken access = _tokenHelper.CreateToken(user, operationClaims);
 
             return access;
-
         }
     }
 }
